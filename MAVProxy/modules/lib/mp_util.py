@@ -20,10 +20,10 @@ if platform.system() == 'Windows':
     # auto-detection is failing on windows, for an unknown reason
     has_wxpython = True
 else:
-    import imp
+    import importlib.util
     try:
-        imp.find_module('wx')
-        has_wxpython = True
+        spec = importlib.util.find_spec('wx')
+        has_wxpython = spec is not None
     except ImportError as e:
         pass
 
